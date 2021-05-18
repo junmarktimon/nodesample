@@ -1,7 +1,25 @@
+// const express = require('express');
+// const app = express();
+// const port = 3000;
+
+// app.get('/', (req, res) => res.send('Hello World!'));
+
+// app.listen(process.env.PORT || port, () => console.log('Node server running at http://localhost:${port}'));
+
+
 const express = require('express');
 const app = express();
-const port = 3000;
+const path = require('path');
+const router = express.Router();
 
-app.get('/', (req, res) => res.send('Hello World!'));
+router.get('/',function(req,res){
+  res.sendFile(path.join(__dirname+'/index.html'));
+  //__dirname : It will resolve to your project folder.
+});
 
-app.listen(process.env.PORT || port, () => console.log('Node server running at http://localhost:${port}'));
+
+//add the router
+app.use('/', router);
+app.listen(process.env.port || 3000);
+
+console.log('Running at Port 3000');
